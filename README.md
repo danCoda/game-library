@@ -1,4 +1,4 @@
-#game-library
+# game-library
 
 What is this? - This is a basic web app and a proof of concept for myself. More specifically, this is for practising an exciting new technology, which we will definitely not fear and face head on! - Google Firebase.
 
