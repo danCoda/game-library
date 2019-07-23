@@ -15,7 +15,7 @@ signupForm.addEventListener('submit', (event) => {
 
             // Clear out form fields.
             signupForm.reset();
-        })
+        }) 
         .catch (e => {
             console.error(e.message);
         });
