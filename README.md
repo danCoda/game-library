@@ -8,5 +8,5 @@ This project is for 'fun'. In the end, it should have these features:
 * CRUD functionality related to the Firestore (noSQL database, similar to MongoDB)
 * Hosting through Firebase Hosting
 * Authentication; Users who are logged in have more features
-* Storage; Users can upload files.
+* Storage; Users can upload files
 * Routing using NodeJS and Express.
