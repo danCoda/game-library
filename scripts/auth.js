@@ -15,8 +15,8 @@ signupForm.addEventListener('submit', (event) => {
 
             // Clear out form fields.
             signupForm.reset();
-        }) 
-        .catch (e => {
+        })
+        .catch(e => {
             console.error(e.message);
         });
 });
@@ -76,11 +76,13 @@ auth.onAuthStateChanged(user => {
     if (user) {
         console.log("User has logged in : ", user);
         // Get data
-        db.collection('guides').get()
-            .then(snapshot => {
-                setupGuides(snapshot.docs);
-                setupUI(user);
-            });
+        //db.collection('guides').get().then(snapshot => {
+        db.collection('guides').onSnapshot(snapshot => {
+            setupGuides(snapshot.docs);
+            setupUI(user);
+        }).catch(err => {
+            console.log(err.message);
+        });
     } else {
         console.log("User has logged out.");
         setupGuides([]);
