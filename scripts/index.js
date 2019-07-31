@@ -40,10 +40,14 @@ const accountDetails = document.querySelector('.account-details');
 const setupUI = (user) => {
     if (user) {
         // account info
-        const html = `
-            <div>Logged in as ${user.email}</div>
-        `;
-        accountDetails.innerHTML = html;
+        db.collection('users').doc(user.uid).get().then(doc => {
+            const html = `
+                <div>Logged in as ${user.email}</div>
+                <div>Bio: ${doc.data().bio}</div>
+            `;
+            accountDetails.innerHTML = html;
+        });
+
 
         // toggle UI elements
         loggedInLinks.forEach(item => item.style.display = 'block');
@@ -51,7 +55,7 @@ const setupUI = (user) => {
     } else {
         // Hide account details
         accountDetails.innerHTML = '';
-         
+
         // toggle UI elements
         loggedInLinks.forEach(item => item.style.display = 'none');
         loggedOutLinks.forEach(item => item.style.display = 'block');

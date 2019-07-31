@@ -9,6 +9,11 @@ signupForm.addEventListener('submit', (event) => {
     // Sign up user
     auth.createUserWithEmailAndPassword(email, password)
         .then(credential => {
+            return db.collection('users').doc(credential.user.uid).set({ // This bio that we're setting will have the same ID as the user.
+                bio: signupForm['signup-bio'].value
+            });
+        })
+        .then(() => {
             // Close modal
             const modal = document.querySelector('#modal-signup');
             M.Modal.getInstance(modal).close();
@@ -47,7 +52,7 @@ logout.addEventListener('click', (e) => {
         .then(() => {
             console.log('User signed out!');
         });
-})
+});
 
 // Login
 const loginForm = document.querySelector('#login-form');
@@ -80,9 +85,10 @@ auth.onAuthStateChanged(user => {
         db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs);
             setupUI(user);
-        }).catch(err => {
+        }, err => {
             console.log(err.message);
-        });
+        }); /* .catch(err => {
+        }); */
     } else {
         console.log("User has logged out.");
         setupGuides([]);
